@@ -798,6 +798,7 @@ module Net; module SFTP
       #   sftp.remove("/path/to/file")
       #   sftp.loop
       def loop(&block)
+        pending_requests ||= {}
         block ||= Proc.new { pending_requests.any? }
         session.loop(&block)
       end
